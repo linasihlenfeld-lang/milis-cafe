@@ -376,8 +376,9 @@ dialog#impressum::backdrop{background:rgba(10,7,5,0.72); backdrop-filter:blur(2p
 .imp-placeholder{color:var(--gold-bright); font-style:italic;}
 
 /* ---------- reveal ---------- */
-.reveal{opacity:0; transform:translateY(22px); filter:blur(5px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1), filter .8s cubic-bezier(.22,1,.36,1);}
-.reveal.in{opacity:1; transform:translateY(0); filter:blur(0);}
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+/* .menu-index is position:sticky; a filter on it (or on this ancestor chain) would break that positioning and smear nearby content — keep reveal motion filter-free everywhere. */
 
 /* ---------- focus ---------- */
 a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
