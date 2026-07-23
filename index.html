@@ -248,12 +248,12 @@ section{padding:92px 0 108px;}
 
 /* ---------- menu / karte ---------- */
 .menu-layout{display:grid; grid-template-columns:200px 1fr; gap:52px; align-items:start;}
-@media (max-width:860px){ .menu-layout{grid-template-columns:1fr;} .menu-index{display:none;} }
 .menu-index{position:sticky; top:96px; display:flex; flex-direction:column; gap:1px;}
 .menu-index a{
   font-family:var(--font-mono); font-size:12px; letter-spacing:.03em; text-decoration:none;
   color:var(--cream-soft); padding:10px 2px; border-bottom:1px dotted var(--line); transition:color .3s cubic-bezier(.22,1,.36,1), padding-left .3s cubic-bezier(.22,1,.36,1);
 }
+@media (max-width:860px){ .menu-layout{grid-template-columns:1fr;} .menu-index{display:none;} }
 .menu-index a:hover{color:var(--gold-bright); padding-left:8px;}
 .menu-cat{border-bottom:1px solid var(--line);}
 .menu-cat:first-of-type{border-top:1px solid var(--line);}
