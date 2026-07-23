@@ -856,6 +856,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Menu index links must open the target category, not just scroll to its (collapsed) header
+  document.querySelectorAll('.menu-index a').forEach(function(a){
+    a.addEventListener('click', function(){
+      var details = document.getElementById(a.getAttribute('href').slice(1));
+      if(details) details.open = true;
+    });
+  });
+
   // Impressum dialog
   var dialog = document.getElementById('impressum');
   document.getElementById('openImpressum').addEventListener('click', function(){ dialog.showModal(); });
@@ -927,7 +935,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
     var parts = new Intl.DateTimeFormat('de-DE', {timeZone:'Europe/Berlin', hour:'2-digit', minute:'2-digit', weekday:'short', hour12:false}).formatToParts(new Date());
     var map = {}; parts.forEach(function(p){ map[p.type] = p.value; });
     var wdMap = {'So':0,'Mo':1,'Di':2,'Mi':3,'Do':4,'Fr':5,'Sa':6};
-    return { day: wdMap[map.weekday], hour: parseInt(map.hour,10), minute: parseInt(map.minute,10) };
+    return { day: wdMap[map.weekday.replace('.', '')], hour: parseInt(map.hour,10), minute: parseInt(map.minute,10) };
   }
   var now = berlinNow();
   var todayRow = document.querySelector('.hours-table tr[data-day="'+now.day+'"]');
