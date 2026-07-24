@@ -214,6 +214,7 @@ section{padding:92px 0 108px;}
 }
 .dish{background:var(--ink); display:flex; flex-direction:column; height:100%;}
 .dish .photo{position:relative; flex:1; min-height:0; overflow:hidden; background:var(--ink);}
+.dish .photo .dim, .insta-mosaic .frame .dim{position:absolute; inset:0; background:#000; pointer-events:none;}
 .dish .photo img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.92);}
 .dish{transition:box-shadow .3s cubic-bezier(.22,1,.36,1);}
 .dish:hover{box-shadow:inset 0 0 0 1px var(--gold);}
@@ -344,7 +345,7 @@ section{padding:92px 0 108px;}
 .insta h2{font-size:clamp(1.9rem,3.2vw,2.5rem);}
 .insta p{color:var(--cream-soft); margin-top:10px; max-width:40ch; font-style:italic;}
 .insta-mosaic{display:flex; gap:8px; position:relative; z-index:1; flex-shrink:0;}
-.insta-mosaic .frame{width:88px; height:88px; overflow:hidden; border:1px solid var(--line-strong);}
+.insta-mosaic .frame{width:88px; height:88px; overflow:hidden; border:1px solid var(--line-strong); position:relative;}
 .insta-mosaic img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.9);}
 @media (max-width:640px){ .insta-mosaic{display:none;} }
 
@@ -454,6 +455,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
       <article class="dish">
         <div class="photo">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="San-Sebastián-Cheesecake mit Mango-Kern, angeschnitten" loading="lazy" />
+          <span class="dim"></span>
           <span class="price-tag">ab 6,50 €</span>
         </div>
         <div class="body">
@@ -464,6 +466,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
       <article class="dish">
         <div class="photo">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="Brotzeit Tuna Deluxe auf Sauerteigbrot" loading="lazy" />
+          <span class="dim"></span>
           <span class="price-tag">17,90 €</span>
         </div>
         <div class="body">
@@ -474,6 +477,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
       <article class="dish">
         <div class="photo">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="Mili's Beef n' Cheese mit Köfte, Ei und Andalouse-Sauce" loading="lazy" />
+          <span class="dim"></span>
           <span class="price-tag">11,90 €</span>
         </div>
         <div class="body">
@@ -484,6 +488,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
       <article class="dish">
         <div class="photo">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="Falafel Sandwich mit Andalouse-Sauce und Spiegelei" loading="lazy" />
+          <span class="dim"></span>
           <span class="price-tag">10,90 €</span>
         </div>
         <div class="body">
@@ -772,9 +777,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
           <p>Frühstücksplatten, Cheesecake-Nahaufnahmen und Neuigkeiten aus der Küche — bevor sie auf der Karte landen.</p>
         </div>
         <div class="insta-mosaic" aria-hidden="true">
-          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /></span>
-          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /></span>
-          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /></span>
+          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /><span class="dim"></span></span>
+          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /><span class="dim"></span></span>
+          <span class="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" loading="lazy" /><span class="dim"></span></span>
         </div>
         <a class="btn btn-primary" href="https://www.instagram.com/milis_cafe_/" target="_blank" rel="noopener"><span>Folgen</span><span class="btn-icon">↗</span></a>
       </div>
@@ -881,7 +886,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
   if(hasGSAP){ gsap.registerPlugin(ScrollTrigger); }
 
   if(window.Lenis && hasGSAP && !reduceMotion){
-    lenis = new Lenis({ smoothWheel:true, duration:0.9, wheelMultiplier:1 });
+    lenis = new Lenis({ smoothWheel:true, duration:0.55, wheelMultiplier:1.25, touchMultiplier:1.4 });
     window.lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function(time){ lenis.raf(time*1000); });
@@ -999,19 +1004,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
         .fromTo(cfg.tint, {opacity:0.55}, {opacity:1}, 0);
       });
 
-      // Dish photos and the Instagram mosaic have no separate tint layer, so the
-      // same recede-and-darken motion is driven by scale + brightness on the image itself.
+      // Dish photos and the Instagram mosaic use a plain dark overlay (opacity only) instead of
+      // an animated CSS filter — filter forces a repaint every scroll frame and was the main
+      // source of scroll jank; transform + opacity stay on the compositor and stay smooth.
       gsap.utils.toArray('.dish .photo, .insta-mosaic .frame').forEach(function(el){
         var img = el.querySelector('img');
+        var dim = el.querySelector('.dim');
         if(!img) return;
         gsap.timeline({
           defaults:{ease:'none'},
           scrollTrigger:{trigger:el, start:'top bottom', end:'bottom top', scrub:true}
-        }).fromTo(img, {scale:1.1, filter:'saturate(0.92) brightness(1.08)'}, {scale:0.96, filter:'saturate(0.92) brightness(0.7)'}, 0);
+        })
+        .fromTo(img, {scale:1.1}, {scale:0.96}, 0)
+        .fromTo(dim, {opacity:0}, {opacity:0.45}, 0);
       });
 
       return function(){
-        gsap.set(['.hero-tile img.bg','.about-figure .photo img','.hero-tile .tint','.about-figure .scrim','.dish .photo img','.insta-mosaic img'], {clearProps:'all'});
+        gsap.set(['.hero-tile img.bg','.about-figure .photo img','.hero-tile .tint','.about-figure .scrim','.dish .photo img','.dish .photo .dim','.insta-mosaic img','.insta-mosaic .dim'], {clearProps:'all'});
       };
     });
   }
