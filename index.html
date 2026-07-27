@@ -43,7 +43,7 @@ html{scroll-behavior:smooth;}
 body{
   margin:0; background:var(--ink); color:var(--cream);
   font-family:var(--font-body); font-size:16px; line-height:1.6;
-  -webkit-font-smoothing:antialiased; position:relative;
+  -webkit-font-smoothing:antialiased; position:relative; overflow-x:hidden;
 }
 body::before{
   content:""; position:fixed; inset:0; pointer-events:none; z-index:2; opacity:0.05; mix-blend-mode:overlay;
@@ -382,6 +382,26 @@ dialog#impressum::backdrop{background:rgba(10,7,5,0.72); backdrop-filter:blur(2p
 .reveal.in{opacity:1; transform:translateY(0);}
 /* .menu-index is position:sticky; a filter on it (or on this ancestor chain) would break that positioning and smear nearby content — keep reveal motion filter-free everywhere. */
 
+/* Paired image/text entrances: each side slides in from its own outward edge and meets in place. */
+.slide-left{opacity:0; transform:translateX(-64px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);}
+.slide-right{opacity:0; transform:translateX(64px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);}
+.slide-left.in, .slide-right.in{opacity:1; transform:translateX(0);}
+
+/* ---------- section wipe (cover-over) ---------- */
+main section{position:relative; background:var(--ink);}
+main section.alt{background:var(--ink-2);}
+/* Explicit ids, not nth-of-type: GSAP's pin reparents Karte/Bewertungen out of <main> while
+   pinned, which would otherwise shift every later section's nth-of-type position. !important
+   because GSAP's pin also sets its own inline z-index on the sections it pins. */
+#hero{z-index:1 !important;}
+#signature{z-index:2 !important;}
+#ueber{z-index:3 !important;}
+#karte{z-index:4 !important;}
+#stimmen{z-index:5 !important;}
+#besuch{z-index:6 !important;}
+#instagram{z-index:7 !important;}
+footer{position:relative; z-index:8; background:var(--ink);}
+
 /* ---------- focus ---------- */
 a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
 </style>
@@ -403,9 +423,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section id="hero" class="hero">
     <div class="wrap hero-grid">
-      <div>
+      <div class="slide-left">
         <p class="eyebrow">Café · Hamburg-Neustadt</p>
         <h1>ANDALUSIEN<br /><em>ZUM FRÜHSTÜCK.</em></h1>
         <p class="lede">Hausgemachte Küche zwischen Sevilla und Marrakesch — Shakshuka, San-Sebastián-Cheesecake und Kaffee, wie ihn sich die Neustadt seit Jahren mit 4,8 Sternen verdient.</p>
@@ -425,7 +445,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
           <div class="trust-item">10–20 € pro Person</div>
         </div>
       </div>
-      <div class="hero-tile-frame">
+      <div class="hero-tile-frame slide-right">
         <div class="hero-tile" aria-hidden="true">
           <img class="bg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="" />
           <div class="tint"></div>
@@ -507,7 +527,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
 
   <section id="ueber" class="alt">
     <div class="wrap about-grid">
-      <div class="about-figure-frame reveal">
+      <div class="about-figure-frame slide-left">
         <div class="about-figure">
           <div class="photo">
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23241A13'/%3E%3Cg fill='none' stroke='%23C9973A' stroke-width='3' opacity='0.55'%3E%3Crect x='138' y='188' width='124' height='92' rx='6'/%3E%3Ccircle cx='200' cy='234' r='17'/%3E%3Cpath d='M138 258l32-30 22 20 32-34 38 44'/%3E%3C/g%3E%3C/svg%3E" alt="Marokkanischer Minztee wird eingeschenkt" loading="lazy" />
@@ -516,7 +536,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
           </div>
         </div>
       </div>
-      <div class="about-body reveal">
+      <div class="about-body slide-right">
         <p class="eyebrow">Die Idee</p>
         <h2 style="margin-bottom:18px;">Spanisch-marokkanisch, mit hanseatischer Beständigkeit</h2>
         <p>Mili's Cafe bringt die Frühstückskultur des Südens in die Hamburger Neustadt: <strong>Shakshuka statt Rührei</strong>, San-Sebastián-Cheesecake statt Sonntagskuchen, Mint-Tee neben dem Cappuccino. Die Karte ist lang und bewusst vielseitig — von Eiergerichten über Bagels, Quiches und Ofenkartoffeln bis zu Crêpes und Desserts.</p>
@@ -713,7 +733,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
 
   <section id="besuch">
     <div class="wrap visit-grid">
-      <div class="reveal">
+      <div class="slide-left">
         <p class="eyebrow">Vorbeikommen</p>
         <h2 style="margin-bottom:20px;">Neustädter Neuer Weg 20</h2>
         <span class="status-badge" id="statusBadge"><span class="dot"></span><span id="statusText">Öffnungszeiten werden geprüft …</span></span>
@@ -759,7 +779,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
           </tbody>
         </table>
       </div>
-      <div class="reveal">
+      <div class="slide-right">
         <div class="map-frame">
           <iframe title="Karte: Mili's Cafe, Neustädter Neuer Weg 20, Hamburg" loading="lazy" src="https://www.google.com/maps?q=Neust%C3%A4dter+Neuer+Weg+20,+20459+Hamburg&output=embed"></iframe>
         </div>
@@ -767,7 +787,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
     </div>
   </section>
 
-  <section>
+  <section id="instagram">
     <div class="wrap">
       <div class="insta reveal">
         <div>
@@ -970,6 +990,67 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
     revealEls.forEach(function(el){ io.observe(el); });
   } else {
     revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Paired image/text entrances: text slides in from its outward edge, the photo from the other.
+  var slideLeftEls = document.querySelectorAll('.slide-left');
+  var slideRightEls = document.querySelectorAll('.slide-right');
+  if(hasGSAP && (slideLeftEls.length || slideRightEls.length)){
+    gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+      gsap.set(slideLeftEls, {opacity:0, x:-64});
+      gsap.set(slideRightEls, {opacity:0, x:64});
+      ScrollTrigger.batch('.slide-left', {
+        start: 'top 85%', once: true,
+        onEnter: function(batch){ gsap.to(batch, {opacity:1, x:0, duration:0.9, ease:'power3.out', overwrite:true}); }
+      });
+      ScrollTrigger.batch('.slide-right', {
+        start: 'top 85%', once: true,
+        onEnter: function(batch){ gsap.to(batch, {opacity:1, x:0, duration:0.9, ease:'power3.out', overwrite:true}); }
+      });
+      return function(){
+        gsap.set(slideLeftEls, {clearProps:'opacity,transform'});
+        gsap.set(slideRightEls, {clearProps:'opacity,transform'});
+      };
+    });
+    gsap.matchMedia().add('(prefers-reduced-motion: reduce)', function(){
+      gsap.set(slideLeftEls, {opacity:1, x:0, clearProps:'opacity,transform'});
+      gsap.set(slideRightEls, {opacity:1, x:0, clearProps:'opacity,transform'});
+    });
+  } else {
+    slideLeftEls.forEach(function(el){ el.classList.add('in'); });
+    slideRightEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Safety net: ScrollTrigger.batch's onEnter only fires on a scroll crossing — it does not
+  // retroactively fire for elements already past their threshold at page load (e.g. the hero,
+  // which starts fully in view). Without this, above-the-fold reveal/slide content would stay
+  // invisible forever for anyone who never scrolls back up past it.
+  if(hasGSAP){
+    [revealEls, slideLeftEls, slideRightEls].forEach(function(list){
+      list.forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight * 0.88){
+          gsap.to(el, {opacity:1, x:0, y:0, duration:0.8, ease:'power2.out', overwrite:true});
+        }
+      });
+    });
+  }
+
+  // Section wipe: "Karte" and "Bewertungen" have no scroll-scrubbed parallax inside them, so they can
+  // pin safely while the next section slides up and covers them — sections that DO hold a scrubbed
+  // photo (Hero, Idee, Instagram) are deliberately left out, since pinning would freeze that effect.
+  if(hasGSAP){
+    gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+      [{sel:'#karte', z:4}, {sel:'#stimmen', z:5}].forEach(function(cfg){
+        var el = document.querySelector(cfg.sel);
+        if(!el) return;
+        ScrollTrigger.create({
+          trigger:el, start:'top top', pin:true, pinSpacing:false,
+          onRefresh: function(){ el.style.setProperty('z-index', cfg.z, 'important'); }
+        });
+        el.style.setProperty('z-index', cfg.z, 'important');
+      });
+    });
   }
 
   // Sticky-photo parallax: as each framed photo scrolls through, it slowly recedes and
