@@ -1036,12 +1036,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
     });
   }
 
-  // Section wipe: "Karte" and "Bewertungen" have no scroll-scrubbed parallax inside them, so they can
-  // pin safely while the next section slides up and covers them — sections that DO hold a scrubbed
-  // photo (Hero, Idee, Instagram) are deliberately left out, since pinning would freeze that effect.
+  // Section wipe: "Bewertungen" has no scroll-scrubbed parallax inside it, so it can pin safely
+  // while the next section slides up and covers it — "Karte" is deliberately left out even though
+  // it has no parallax either, because pinning freezes the section at one viewport-height slice and
+  // its accordion content (10 categories, some open) is taller than that, making it impossible to
+  // scroll to or fully open. Hero/Idee/Instagram are excluded for the original scrubbed-parallax reason.
   if(hasGSAP){
     gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
-      [{sel:'#karte', z:4}, {sel:'#stimmen', z:5}].forEach(function(cfg){
+      [{sel:'#stimmen', z:5}].forEach(function(cfg){
         var el = document.querySelector(cfg.sel);
         if(!el) return;
         ScrollTrigger.create({
