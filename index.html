@@ -1041,11 +1041,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
   // it has no parallax either, because pinning freezes the section at one viewport-height slice and
   // its accordion content (10 categories, some open) is taller than that, making it impossible to
   // scroll to or fully open. Hero/Idee/Instagram are excluded for the original scrubbed-parallax reason.
+  // Same height check applies to Bewertungen itself: below the 900px breakpoint its review layout
+  // (rail/feature/stack) collapses to a single stacked column and can exceed one viewport's height,
+  // so the pin is skipped there too — pinning taller-than-viewport content cuts it off and produces
+  // a visible jump straight to the next section once the pin's scroll distance runs out.
   if(hasGSAP){
     gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
       [{sel:'#stimmen', z:5}].forEach(function(cfg){
         var el = document.querySelector(cfg.sel);
-        if(!el) return;
+        if(!el || el.offsetHeight > window.innerHeight) return;
         ScrollTrigger.create({
           trigger:el, start:'top top', pin:true, pinSpacing:false,
           onRefresh: function(){ el.style.setProperty('z-index', cfg.z, 'important'); }
