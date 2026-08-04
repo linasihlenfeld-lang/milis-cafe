@@ -84,7 +84,7 @@ header .wrap{pointer-events:none;}
   background:color-mix(in srgb, var(--ink-2) 86%, transparent);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
 }
-.wordmark{font-family:var(--font-display); font-size:24px; letter-spacing:0.04em; display:flex; align-items:baseline; gap:6px; text-decoration:none; color:var(--cream); flex-shrink:0;}
+.wordmark{font-family:var(--font-display); font-size:24px; letter-spacing:0.04em; text-decoration:none; color:var(--cream); flex-shrink:0; white-space:nowrap;}
 .wordmark span{color:var(--gold-bright);}
 .nav-links{display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;}
 .nav-links a{font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; color:var(--cream-soft); transition:color .3s cubic-bezier(.22,1,.36,1);}
@@ -254,7 +254,18 @@ section{padding:92px 0 108px;}
   font-family:var(--font-mono); font-size:12px; letter-spacing:.03em; text-decoration:none;
   color:var(--cream-soft); padding:10px 2px; border-bottom:1px dotted var(--line); transition:color .3s cubic-bezier(.22,1,.36,1), padding-left .3s cubic-bezier(.22,1,.36,1);
 }
-@media (max-width:860px){ .menu-layout{grid-template-columns:1fr;} .menu-index{display:none;} }
+@media (max-width:860px){
+  .menu-layout{grid-template-columns:1fr;}
+  .menu-index{
+    flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:4px; margin-bottom:20px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .menu-index::-webkit-scrollbar{display:none;}
+  .menu-index a{
+    flex:0 0 auto; white-space:nowrap; border:1px solid var(--line); border-bottom:1px solid var(--line);
+    border-radius:999px; padding:8px 14px;
+  }
+}
 .menu-index a:hover{color:var(--gold-bright); padding-left:8px;}
 .menu-cat{border-bottom:1px solid var(--line);}
 .menu-cat:first-of-type{border-top:1px solid var(--line);}
@@ -416,7 +427,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
         <li><a href="#stimmen">Bewertungen</a></li>
         <li><a href="#besuch">Anfahrt</a></li>
       </ul>
-      <a class="nav-cta" href="#besuch"><span>Reservierung</span><span class="btn-icon">↗</span></a>
+      <a class="nav-cta" href="#besuch"><span>Anrufen</span><span class="btn-icon">↗</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
     </div>
   </div>
@@ -430,13 +441,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
         <h1>ANDALUSIEN<br /><em>ZUM FRÜHSTÜCK.</em></h1>
         <p class="lede">Hausgemachte Küche zwischen Sevilla und Marrakesch — Shakshuka, San-Sebastián-Cheesecake und Kaffee, wie ihn sich die Neustadt seit Jahren mit 4,8 Sternen verdient.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#besuch"><span>Reservierung anfragen</span><span class="btn-icon">↗</span></a>
+          <a class="btn btn-primary" href="#besuch"><span>Tisch anrufen &amp; reservieren</span><span class="btn-icon">↗</span></a>
           <a class="btn btn-ghost" href="#karte">Speisekarte ansehen</a>
         </div>
         <div class="trust-strip">
           <div class="trust-item">
             <span class="stars" aria-hidden="true">★★★★★</span>
-            <span><b>4,8</b> · 752 Google-Rezensionen</span>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Mili%27s+Cafe+Neust%C3%A4dter+Neuer+Weg+20+Hamburg" target="_blank" rel="noopener"><b>4,8</b> · 752 Google-Rezensionen</a>
           </div>
           <div class="trust-item">
             <span class="stars" aria-hidden="true">★★★★★</span>
@@ -721,7 +732,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
       <div class="rating-summary reveal">
         <div class="rating-block">
           <span class="score" data-count="4.8">0,0</span>
-          <span class="meta"><span class="src">Google</span>752 Rezensionen</span>
+          <a class="meta" href="https://www.google.com/maps/search/?api=1&amp;query=Mili%27s+Cafe+Neust%C3%A4dter+Neuer+Weg+20+Hamburg" target="_blank" rel="noopener"><span class="src">Google</span>752 Rezensionen ↗</a>
         </div>
         <div class="rating-block">
           <span class="score" data-count="4.7">0,0</span>
